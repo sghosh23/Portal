@@ -1,0 +1,68 @@
+<% provide(:title, full_name(@user[:contact][:first_name], @user[:contact][:last_name])) %>
+
+
+
+
+<div class="row">
+  <p > <h3 class="bill"> Profile summary <small> status <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></small></h3></p>
+  <div class="col-xs-6 ">
+
+        <div class="thumbnail">
+        <div class="caption">
+        <dl class="dl-special">
+          <dt><small>Account name :</small></dt>
+          <dd><%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %> </dd>
+          <dt><small>Organization Name :</small></dt>
+          <dd><%= @user[:contact][:organization_name] if @user[:contact][:organization_name] %></dd>
+          <dt><small>Account Number :</small></dt>
+          <dd><%= @user[:user_id] %></dd>
+
+          <dt><small>Driving License :</small></dt>
+          <dd><%= licence(@user[:driving_license_number]) %></dd>
+          <dt><small>Social security number :</small></dt>
+          <dd><%= social_security(@user[:contact][:social_security_code1], @user[:contact][:social_security_code2], @user[:contact][:social_security_code3]) %>
+
+          </dd>
+          <dt><small>Email :</small></dt>
+          <dd><%= @user[:contact][:email] %> </dd>
+          <dt><small>Service Address :</small></dt>
+          <dd>
+             <address>
+             <strong> <%= @user[:contact][:address1]%> </strong></br>
+             <%= @user[:contact][:address2] if @user[:contact][:address2] %>
+             <%= @user[:contact][:postal_code] %> - <%= @user[:contact][:city] %>,  <%= @user[:contact][:state_province] %>, USA
+             </adress>
+           </dd>
+          <dt><small>Company :</small></dt>
+          <dd><%= @user[:company_name] %> </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+
+      <h4> <em>Account Info  (Owed balance : <%= number_to_currency(@user[:owing_balance],   precision: 2) %>)</em>   </h4>
+      <ul class="list-group">
+        <li class="list-group-item"><small><em> Account created :</em> <%= time_format(@user[:create_datetime]) %></small></li>
+        <li class="list-group-item"><small><em> Last login :</em> <%= time_format(@user[:last_login]) %></small></li>
+        <li class="list-group-item"><small><em> Next invoice :</em> <%= time_format(@user[:next_invoice_date]) %></small></li>
+        <li class="list-group-item"><small><em> Credit card expires :</em> <%= time_format(@user[:credit_card][:expiry])%> </small></li>
+        <li class="list-group-item"><small><em> Invoice Delivery method :</em> <%= delivery_method(@user[:invoice_delivery_method_id])%> </small></li>
+      </ul>
+
+  </div>
+</div>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+
+    </section>
+    <section class= "stats">
+      <%#= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+
+  </div>
+</div>
+<%#= current_user %>

@@ -1,0 +1,30 @@
+<h2> Invoice lists </h2>
+<table class="table table-condensed">
+  <tr>
+    <th>ID</th>
+    <th>Due date</th>
+    <th>Status</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @invoices.each do |invoice| %>
+    <tr class= "<%= "danger" if invoice[:status_descr] == "Unpaid" %>">
+        <td><%= link_to invoice[:id], invoice_path(invoice[:id])  %></td>
+        <td><%= time_format invoice[:due_date] %></td>
+        <td><%= invoice[:status_descr] %></td>
+        <td><%= number_to_currency(invoice[:total], precision: 2) %></td>
+        <td><%= number_to_currency(invoice[:balance].to_f,   precision: 2)%></td>
+        <td><%= link_to "Show", invoice_path(invoice[:id]) %></td>
+        <td><%= link_to "Downdload pdf", invoice_path(invoice[:id], format: 'pdf')%></td>
+    </tr>
+  <% end %>
+
+
+</table>
+<%#= @current_user %>
+<!-- <% @invoices.each do |invoice| %>
+  <%= invoice %><br>
+<% end %> -->

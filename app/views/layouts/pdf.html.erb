@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "application", media: "screen" %>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+    <%= wicked_pdf_javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  </head>
+  <body>
+    <div id="header">
+      <%#= wicked_pdf_image_tag 'entity-10.png' %>
+    </div>
+
+      <%= yield %>
+
+  </body>
+</html>
