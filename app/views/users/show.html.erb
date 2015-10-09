@@ -19,6 +19,8 @@
 
           <dt><small>Driving License :</small></dt>
           <dd><%= licence(@user[:driving_license_number]) %></dd>
+          <dt><small>Phone Number :</small></dt>
+          <dd><%= "#{@user[:contact][:phone_country_code]} - #{@user[:contact][:phone_area_code]} - #{@user[:contact][:phone_number]}"  %></dd>
           <dt><small>Social security number :</small></dt>
           <dd><%= social_security(@user[:contact][:social_security_code1], @user[:contact][:social_security_code2], @user[:contact][:social_security_code3]) %>
 
@@ -36,6 +38,7 @@
           <dt><small>Company :</small></dt>
           <dd><%= @user[:company_name] %> </dd>
         </dl>
+        <p> <%= link_to 'Update contact', edit_user_path(@user[:user_id]) %> </p>
       </div>
     </div>
   </div>
@@ -46,7 +49,7 @@
         <li class="list-group-item"><small><em> Account created :</em> <%= time_format(@user[:create_datetime]) %></small></li>
         <li class="list-group-item"><small><em> Last login :</em> <%= time_format(@user[:last_login]) %></small></li>
         <li class="list-group-item"><small><em> Next invoice :</em> <%= time_format(@user[:next_invoice_date]) %></small></li>
-        <li class="list-group-item"><small><em> Credit card expires :</em> <%= time_format(@user[:credit_card][:expiry])%> </small></li>
+        <li class="list-group-item"><small><em> Credit card expires :</em> <%= time_format(@user[:credit_card][:expiry]) if @user[:credit_card] %> </small></li>
         <li class="list-group-item"><small><em> Invoice Delivery method :</em> <%= delivery_method(@user[:invoice_delivery_method_id])%> </small></li>
       </ul>
 
@@ -65,4 +68,4 @@
 
   </div>
 </div>
-<%#= current_user %>
+<%#= @user %>

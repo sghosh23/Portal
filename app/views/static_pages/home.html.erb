@@ -17,28 +17,33 @@
             <dt><small>Service Address :</small></dt>
             <dd>
                <address>
-               <strong> <%= @user[:contact][:address1]%> </strong></br>
-               <%= @user[:contact][:address2] if @user[:contact][:address2] %>
-               <%= @user[:contact][:postal_code] %> - <%= @user[:contact][:city] %>,  <%= @user[:contact][:state_province] %>, USA
+                 <strong> <%= @user[:contact][:address1]%> </strong></br>
+                 <%= @user[:contact][:address2] if @user[:contact][:address2] %>
+                 <%= @user[:contact][:postal_code] %> - <%= @user[:contact][:city] %>,  <%= @user[:contact][:state_province] %>, USA
                </adress>
              </dd>
           </dl>
         </div>
+
+
       </div>
     </div>
     <div class="col-xs-6">
-      <div class="thumbnail">
-         <div class="caption">
-            <h4> Statement </h4>
-            <small><em> Next Invoice Date :</em> <%= time_format(@user[:next_invoice_date]) %></small>
-            <ul class="list-group"><h5> Current Plan </h5>
-              <% @items.each do |item| %>
-
-                <li class="list-group-item"> <%= item[:description]%> <small> [ <%= number_to_currency(  item[:amount] )%> ]</small></li>
-
-            <% end %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p><small><em> Next Invoice Date :</em> <%= time_format( @user[:next_invoice_date]) %></small></p>
+          <div class="col-xs-6">
+            <%= link_to "Pay with credit card", new_credit_path, :class => "btn btn-danger", :id => "pay_link" %>
           </div>
+          <div class="col-xs-6">
+            <%= link_to "Pay with ACH", new_bank_path, :class => "btn btn-danger", :id => "pay_link" %>
+          </div>
+        </div>
+        <div class="panel-footer"><small> Please pay your outstanding bills if you have unpaid invoices</small></div>
       </div>
+
+
+
     </div>
   </div>
   <div class="row">
@@ -49,13 +54,13 @@
           <h3 class="panel-title">Last payment</h3>
         </div>
         <div class="panel-body">
-         <%= number_to_currency(@payment[:amount],   precision: 2) %> (<%= @payment[:method] %>)</br>
-         <small> Applied : <%= time_format(@payment[:payment_date]) %></small></small>
+         <%= number_to_currency(@payment_latest[:amount],   precision: 2) %> (<%= @payment_latest[:method] %>)</br>
+         <small> Applied : <%= time_format(@payment_latest[:payment_date]) %></small></small>
         </div>
      </div>
     </div>
     <div class="col-xs-3">
-      <div class="panel panel-danger">
+      <div class="panel panel-warning">
         <div class="panel-heading">
           <h3 class="panel-title">Past Due Balance</h3>
         </div>
@@ -68,11 +73,11 @@
     <div class="col-xs-3">
       <div class="panel panel-success">
         <div class="panel-heading">
-          <h3 class="panel-title">Current Charges <span class=" <%= status_invoice @latest_invoice[:status_id] %>"> <%= status_print @latest_invoice[:status_id] %></span></h3>
+          <h3 class="panel-title">Current Charges <span class=" <%= status_invoice @latest_invoice[:status_id] if @latest_invoice  %>"> <%= status_print @latest_invoice[:status_id] if @latest_invoice %></span></h3>
         </div>
         <div class="panel-body">
-         <%= number_to_currency(@latest_invoice[:balance],   precision: 2) %> </br>
-         <small> Due Date : <%= time_format(@latest_invoice[:due_date]) %></small>
+          <%= number_to_currency(@latest_invoice[:balance],   precision: 2) if @latest_invoice %> </br>
+          <small> Due Date : <%= time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
         </div>
      </div>
     </div>
@@ -83,14 +88,73 @@
         </div>
         <div class="panel-body">
          <%= number_to_currency(@user[:owing_balance],   precision: 2) %></br>
-         <small> Due Date : <%= time_format(@latest_invoice[:due_date]) %></small>
+         <small> Due Date : <%= time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
         </div>
      </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <% if @order %>
+          <h3 class="panel-title">Current plan <span class="badge"> <%= @order[:billing_type_str] %> </span>
+          <small> <u> Active since: <%= time_format(@order[:active_since]) %></u></small></h3>
+          <% end %>
+        </div>
+        <div class="panel-body">
+         <% if @latest_order %>
+          <table class="table">
+            <tr>
+              <th> Item </th>
+              <th>Amount </th>
+            </tr>
+            <% @latest_order.each do |item| %>
+              <tr>
+                <td> <%= item[:description]%> </td>
+                <td><%= number_to_currency( item[:amount] )%> </td>
+              </tr>
+            <% end %>
+          </table>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="col-xs-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Invoice Statement</h3>
+          </div>
+          <div class="panel-body">
+            <%= form_tag create_invoice_url do %>
+              <%= select_tag( :id, options_for_select(@invoice_list) ) %>
+              <%= submit_tag 'Invoice Statement', class: "button" %>
+            <% end %>
+          </div>
+       </div>
+      </div>
+
+         <div class="col-xs-4">
+           <div class="panel panel-primary">
+             <div class="panel-heading">
+               <h3 class="panel-title">Payment Statement</h3>
+             </div>
+             <div class="panel-body">
+               <%= form_tag statement_url do %>
+                 <%= select_tag(:id, options_for_select( @payment_list) ) %>
+                 <%= submit_tag 'Payment Statement', class: "button" %>
+               <% end %>
+             </div>
+          </div>
+         </div>
+
+
+  </div>
   <%#= @data %> </br></br>
 
-  <%#= @latest_invoice %>
+  <%#= @payments_data %>
 <% else %>
   <div class= "center jumbotron">
     <h1>Your </h1>

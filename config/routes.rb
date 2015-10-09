@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get    'profile' => 'users#show'
+  post 'statement' => 'payments#statement'
+  post 'make_payment' => 'payments#make_payment'
+  post 'update_user' => 'users#update_user'
+  post 'create_invoice' => 'invoices#create_invoice'
+  resources :credits, only: [:new, :create]
+  resources :banks, only: [:new, :create]
   resources :invoices
   resources :accounts
   resources :records

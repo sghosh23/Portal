@@ -210,6 +210,3 @@ DEPENDENCIES
   wicked_pdf
   wkhtmltopdf-binary
   wkhtmltopdf-binary-edge
-
-BUNDLED WITH
-   1.10.6

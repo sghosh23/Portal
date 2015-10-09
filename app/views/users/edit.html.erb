@@ -1,15 +1,47 @@
 <% provide(:title, 'Edit') %>
 <h1>Update your profile</h1>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      
-      <%= render 'form', f: f %>
+   <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:user, url: update_user_path) do |f| %>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, :value => @contact[:first_name] %>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, :value => @contact[:last_name] %>
+      <%= f.label :email %>
+      <%= f.text_field :email, :value => @contact[:email] %>
+      <%= f.label :organization_name %>
+      <%= f.text_field :organization_name, :value => @contact[:organization_name] %>
+      <%= f.label "Phone Number"%>
+      <ul class="list-inline">
+        <li><%= f.text_field :phone_area_code , :value => @contact[:phone_area_code] %></li>
+        <li><%= f.text_field :phone_country_code , :value => @contact[:phone_country_code] %></li>
+        <li><%= f.text_field :phone_number , :value => @contact[:phone_number] %></li>
+
+      </ul>
+      <%= f.label "Social Security"%>
+      <ul class="list-inline">
+        <li><%= f.text_field :social_security_code1 , :value => @contact[:social_security_code1] %></li>
+        <li><%= f.text_field :social_security_code2 , :value => @contact[:social_security_code2] %></li>
+        <li><%= f.text_field :social_security_code3 , :value => @contact[:social_security_code3] %></li>
+
+      </ul>
+      <%= f.label :address1 %>
+      <%= f.text_field :address1 , :value => @contact[:address1] %>
+      <%= f.label :address2 %>
+      <%= f.text_field :address2 , :value => @contact[:address2] %>
+      <%= f.label :postal_code %>
+      <%= f.text_field :postal_code , :value => @contact[:postal_code] %>
+      <%= f.label :city %>
+      <%= f.text_field :city , :value => @contact[:city] %>
+      <%= f.label :state_province %>
+      <%= f.text_field :state_province , :value => @contact[:state_province] %>
+      <%= f.label "Include in Notification" %>
+      <%= check_box_tag( :include ) %>
       <%= f.submit "Update Account", class: "btn btn-primary" %>
-    <% end %> 
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %> 
-      <a href="http://gravatar.com/emails" target=_blank>change</a> 
-    </div>
+    <% end %>
+
   </div>
 </div>
+
+
+<%#= @contact %>

@@ -1,0 +1,42 @@
+<% provide(:title, "ACH payment") %>
+
+<div class="row">
+<div class="col-md-12">
+
+<%= params[:method_id] %>
+ <%#= @unpaid_invoices %>
+
+ <!-- <form class="form-horizontal"> -->
+ <%= form_for(@bank, :html => {class: "form-horizontal"}) do |f| %>
+   <%= render 'shared/error_messages', object: f.object %>
+
+
+   <% if @unpaid_invoices %>
+     <%= render 'shared/unpaid_invoices', unpaid_invoices: @unpaid_invoices %>
+  <% end %>
+<div class="form-group">
+  <%= f.label :payment_amount, :class => "control-label col-xs-4" %>
+  <div class="col-xs-4">
+      <%= f.text_field :amount, :class =>"form-control",  :placeholder =>"Amount" %>
+  </div>
+</div>
+<%= f.hidden_field :method_id, :value => 2 %>
+
+  <%= render 'ach', f: f %>
+
+
+
+
+
+
+<div class="form-group">
+    <div class="col-xs-offset-3 col-xs-6">
+
+        <%= f.submit 'Make Payment', :class => "btn btn-primary" %>
+    </div>
+</div>
+
+<% end %>
+<!-- </form> -->
+</div>
+</div>

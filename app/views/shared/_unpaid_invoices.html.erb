@@ -1,0 +1,34 @@
+<p> Paybale Invoices # </p>
+<table class="table table-bordered">
+ <tr>
+   <th>ID</th>
+   <th>Due date</th>
+   <th>Status</th>
+   <th>Amount</th>
+   <th>Balance</th>
+
+   <th></th>
+ </tr>
+
+ <% @unpaid_invoices.each do |invoice| %>
+   <tr>
+       <td>
+         <div class="checkbox">
+           <label>
+             <%= check_box_tag "id[]", invoice[:id], false %>
+             <%= " Invoice-#{invoice[:id]}" %>
+           </label>
+         </div>
+
+       </td>
+       <td><%= time_format invoice[:due_date] %></td>
+       <td><%= invoice[:status_descr] %></td>
+       <td><%= number_to_currency(invoice[:total], precision: 2) %></td>
+       <td><%= number_to_currency(invoice[:balance].to_f, precision: 2)%></td>
+       <td><%= link_to "See invoice-#{invoice[:id]}", invoice_path(invoice[:id]) %></td>
+
+   </tr>
+ <% end %>
+
+
+</table>

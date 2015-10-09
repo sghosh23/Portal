@@ -1,20 +1,39 @@
 class InvoicesController < ApplicationController
   before_action :logged_in_user, only:[:index, :show]
-  before_action :user_data, only: [:show]
-  before_action :all_invoices, only: [:index, :show]
+  before_action :user_data, only: [:show, :create_invoice]
+  #before_action :all_invoices, only: [:index, :show]
+  include InvoiceFiltering
+  
   def index
-    #@user = Hash.new
-    #invoice = Invoice.new('splace')
-    #@invoices = invoice.get_all_invoices(7531)
-    #@current_user = current_user
+    @invoices = invoices
   end
 
   def show
    invoice = Invoice.new
    @invoice = invoice.get_invoice(params[:id])
 
-    @items = @invoice[:invoice_lines].reject { |h| h[:item_id] == "200"}
-    @tax = @invoice[:invoice_lines].select { |h| h[:item_id] == "200"}
+   @items = @invoice[:invoice_lines].reject { |h| h[:item_id] == "200"}
+   @tax = @invoice[:invoice_lines].select { |h| h[:item_id] == "200"}
+
+   respond_to do |format|
+     format.html
+     format.pdf do
+       render pdf: "invoice", layout: 'pdf.html',
+              show_as_html: params[:debug].present?,
+              no_pdf_compression:true,
+              :margin => {:top => 0,
+                          :bottom => 0,
+                          :left => 0,
+                          :right => 0}
+     end
+   end
+ end
+
+ def create_invoice
+   @invoice = Invoice.new.get_invoice(params[:id])
+
+   @items = @invoice[:invoice_lines].reject { |h| h[:item_id] == "200"}
+   @tax = @invoice[:invoice_lines].select { |h| h[:item_id] == "200"}
 
    respond_to do |format|
      format.html

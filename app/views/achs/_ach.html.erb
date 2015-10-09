@@ -1,0 +1,42 @@
+<div class="form-group">
+
+    <%= f.label 'ABA Routing Number', :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+        <%= f.text_field :routing_number, :class =>"form-control",  :placeholder =>"ABA Routing Number" %>
+    </div>
+</div>
+<div class="form-group">
+  <%= f.label 'Bank Account Number', :class => "control-label col-xs-4" %>
+  <div class="col-xs-4">
+      <%= f.text_field :account_number, :class =>"form-control",  :placeholder =>"Bank Account Number" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label 'Bank Name', :class => "control-label col-xs-4" %>
+  <div class="col-xs-4">
+      <%= f.text_field :bank_name, :class =>"form-control",  :placeholder =>"Bank Namer" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label 'Name on Customer Account', :class => "control-label col-xs-4" %>
+  <div class="col-xs-4">
+      <%= f.text_field :account_name, :class =>"form-control",  :placeholder =>"Name on Customer Account" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :account_type, :class => "control-label col-xs-4" %>
+  <div class="col-xs-4">
+    <div class="radio">
+      <label>
+        <%= f.radio_button(:account_type, "checking") %>
+        Checking
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <%= f.radio_button(:account_type, "saving") %>
+        Saving
+      </label>
+    </div>
+  </div>
+</div>

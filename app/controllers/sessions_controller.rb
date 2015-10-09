@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
     username = params[:session][:username]
     user_id = userobj.user_id(params[:session][:username])
     password = params[:session][:password]
-    puts user_id
-    puts password
+    #puts user_id
+    #puts password
     user = userobj.authenticate(user_id, params[:session][:password])
     # if user && params[:session][:password]
       if user
