@@ -7,7 +7,7 @@ class BanksController < ApplicationController
   def create
     @bank = Bank.new(params[:ach])
     if @bank.valid?
-      flash[:notice] = "Payment is success"
+      flash.now[:info] = "Payment is success"
       redirect_to root_url
     else
       render :new

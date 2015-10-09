@@ -7,7 +7,7 @@ class CreditsController < ApplicationController
   def create
     @credit = Credit.new(params[:credit])
     if @credit.valid?
-     flash[:notice] = "Payment is success"
+     flash.now[:info] = "Payment is success"
      redirect_to root_url
     else
       render :new
