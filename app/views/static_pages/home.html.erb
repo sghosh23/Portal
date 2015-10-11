@@ -54,8 +54,11 @@
           <h3 class="panel-title">Last payment</h3>
         </div>
         <div class="panel-body">
-         <%= number_to_currency(@payment_latest[:amount],   precision: 2) %> (<%= @payment_latest[:method] %>)</br>
-         <small> Applied : <%= time_format(@payment_latest[:payment_date]) %></small></small>
+          <% if @payment_latest %>
+           <%= number_to_currency(@payment_latest[:amount],   precision: 2) %> (<%= @payment_latest[:method] %>)</br>
+           <small> Applied : <%= time_format(@payment_latest[:payment_date]) %></small></small>
+          <% end %>
+          <p> You don't have any Latest payment </p>
         </div>
      </div>
     </div>
