@@ -9,4 +9,12 @@ module UserHelper
      "Paper"
    end
   end
+
+  def notification(include)
+    if include == true
+      "is ON"
+    else
+      "is OFF"
+    end
+  end
 end

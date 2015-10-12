@@ -46,7 +46,8 @@ class UsersController < ApplicationController
                :address2 => params[:user][:address2],
                :postal_code => params[:user][:postal_code],
                :city => params[:user][:city],
-               :state_province => params[:user][:state_province]
+               :state_province => params[:user][:state_province],
+               :include => params[:user][:include]
              }
     if User.new.update_contact(session[:user_id], contact)
       flash[:success] = "Profile updated"

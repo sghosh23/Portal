@@ -1,71 +1,80 @@
 <% provide(:title, full_name(@user[:contact][:first_name], @user[:contact][:last_name])) %>
 
+<%#= @user %>
 
-
-
+<div class="page-header">
+  <h1>Billing profile <small> <%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %>| <%= @user[:user_id] %></small></h1>
+</div>
+<div class="col-md-8 col-md-offset-2">
+  <p class="bg-warning custom"> If you want to change your service address and Billing method please call us at 987590214</p>
+</div>
 <div class="row">
-  <p > <h3 class="bill"> Profile summary <small> status <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></small></h3></p>
   <div class="col-xs-6 ">
-
-        <div class="thumbnail">
-        <div class="caption">
-        <dl class="dl-special">
-          <dt><small>Account name :</small></dt>
-          <dd><%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %> </dd>
-          <dt><small>Organization Name :</small></dt>
-          <dd><%= @user[:contact][:organization_name] if @user[:contact][:organization_name] %></dd>
-          <dt><small>Account Number :</small></dt>
-          <dd><%= @user[:user_id] %></dd>
-
-          <dt><small>Driving License :</small></dt>
-          <dd><%= licence(@user[:driving_license_number]) %></dd>
-          <dt><small>Phone Number :</small></dt>
-          <dd><%= "#{@user[:contact][:phone_country_code]} - #{@user[:contact][:phone_area_code]} - #{@user[:contact][:phone_number]}"  %></dd>
-          <dt><small>Social security number :</small></dt>
-          <dd><%= social_security(@user[:contact][:social_security_code1], @user[:contact][:social_security_code2], @user[:contact][:social_security_code3]) %>
-
-          </dd>
-          <dt><small>Email :</small></dt>
-          <dd><%= @user[:contact][:email] %> </dd>
-          <dt><small>Service Address :</small></dt>
-          <dd>
-             <address>
-             <strong> <%= @user[:contact][:address1]%> </strong></br>
-             <%= @user[:contact][:address2] if @user[:contact][:address2] %>
-             <%= @user[:contact][:postal_code] %> - <%= @user[:contact][:city] %>,  <%= @user[:contact][:state_province] %>, USA
-             </adress>
+    <div class="panel panel-primary">
+       <div class="panel-heading">
+         <h3 class="panel-title">Profile summary  <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></h3>
+       </div>
+       <div class="panel-body">
+         <dl class="dl-special">
+           <dt>Account name </dt>
+           <dd><%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %> </dd>
+           <dt>Account Number </dt>
+           <dd><%= @user[:user_id] %></dd>
+           <dt>Organization Name </dt>
+           <dd><%= organization_name(@user[:contact][:organization_name]) %></dd>
+           <dt>Phone Number </dt>
+           <dd><%= "#{@user[:contact][:phone_country_code]} - #{@user[:contact][:phone_area_code]} - #{@user[:contact][:phone_number]}"  %></dd>
+           <dt>Social security</dt>
+           <dd><%= social_security(@user[:contact][:social_security_code1], @user[:contact][:social_security_code2], @user[:contact][:social_security_code3]) %>
            </dd>
-          <dt><small>Company :</small></dt>
-          <dd><%= @user[:company_name] %> </dd>
-        </dl>
-        <p> <%= link_to 'Update contact', edit_user_path(@user[:user_id]) %> </p>
-      </div>
+           <dt>Email </dt>
+           <dd><%= @user[:contact][:email] %> </dd>
+           <dt>Service Address </dt>
+           <dd>
+              <address>
+              <strong> <%= @user[:contact][:address1]%> </strong></br>
+              <%= @user[:contact][:address2] if @user[:contact][:address2] %>
+              <%= @user[:contact][:postal_code] %> - <%= @user[:contact][:city] %>,  <%= @user[:contact][:state_province] %>, USA
+              </adress>
+            </dd>
+         </dl>
+       </div>
     </div>
   </div>
   <div class="col-xs-6">
-
-      <h4> <em>Account Info  (Owed balance : <%= number_to_currency(@user[:owing_balance],   precision: 2) %>)</em>   </h4>
-      <ul class="list-group">
-        <li class="list-group-item"><small><em> Account created :</em> <%= time_format(@user[:create_datetime]) %></small></li>
-        <li class="list-group-item"><small><em> Last login :</em> <%= time_format(@user[:last_login]) %></small></li>
-        <li class="list-group-item"><small><em> Next invoice :</em> <%= time_format(@user[:next_invoice_date]) %></small></li>
-        <li class="list-group-item"><small><em> Credit card expires :</em> <%= time_format(@user[:credit_card][:expiry]) if @user[:credit_card] %> </small></li>
-        <li class="list-group-item"><small><em> Invoice Delivery method :</em> <%= delivery_method(@user[:invoice_delivery_method_id])%> </small></li>
-      </ul>
-
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Account Info  (Owed balance : <%= number_to_currency(@user[:owing_balance],   precision: 2) %>)</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item"> Account created :</em> <%= time_format(@user[:create_datetime]) %>
+          <li class="list-group-item"> Last status change :</em> <%= time_format(@user[:last_status_change]) %>
+          <li class="list-group-item"> Next invoice :</em> <%= time_format(@user[:next_invoice_date]) %>
+          <li class="list-group-item"> Payment method :</em> <%= time_format(@user[:credit_card][:expiry]) if @user[:credit_card] %></li>
+          <li class="list-group-item"> Invoice Delivery method :</em> <%= delivery_method(@user[:invoice_delivery_method_id])%></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
 
-    </section>
-    <section class= "stats">
-      <%#= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="col-md-8">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">  Bill Ready and Payment Notifications <span class="badge"><%= notification(@user[:contact][:include])%></span></h3>
+      </div>
+      <div class="panel-body">
 
+        Get notified when your bill is ready to view and when your payment is successfully received. You will always receive these notifications by email to your billing email address.</br></br>
+        
+        Notification <%= notification(@user[:contact][:include])%></br>
+        <b>EMAIL</b></br></br>
+
+        <%= @user[:contact][:email] %>
+      </div>
+    </div>
   </div>
 </div>
 <%#= @user %>

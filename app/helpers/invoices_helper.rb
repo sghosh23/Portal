@@ -15,6 +15,15 @@ module InvoicesHelper
       "#{num1} - #{num2} - #{num3}"
     end
   end
+  def organization_name(name={})
+
+     base = "Not Registerd"
+     if name.nil?
+       base
+     else
+      "#{name}"
+    end
+  end
   def licence(licence)
     base = "Not Registerd"
     if licence.nil?
@@ -41,5 +50,5 @@ module InvoicesHelper
   def phone_number(country, area = {}, number)
     "#{country} - #{area} - #{number}"
   end
-  
+
 end

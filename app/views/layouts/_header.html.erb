@@ -6,7 +6,7 @@
         <nav>
           <ul class="nav navbar-nav pull-right">
             <li><%= link_to "Dashboard",   root_path %></li>
-            <li><%= link_to "Help",   help_path %></li>
+            <li><%= link_to "Payments",   help_path %></li>
 
             <% if logged_in? %>
               <li> <%= link_to "Invoices", invoices_path  %> </li>
@@ -17,7 +17,7 @@
                 <ul class="dropdown-menu">
                   <% @cuurrent_user = current_user %>
                   <li><%= link_to "Profile", user_path(@current_user[:user_id]) %></li>
-                  <li><%#= link_to "Settings", edit_user_path(current_user) %><a href="#">Settings</a></li>
+                  <li><%= link_to "Settings", edit_user_path(@current_user[:user_id]) %></li>
                   <li class="divider"></li>
                   <li><%= link_to "Log out", logout_path, method: "delete" %><%#= link_to "Log in", login_path %></li>
                 </ul>

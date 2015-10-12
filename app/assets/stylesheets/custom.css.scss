@@ -2,6 +2,7 @@
 @import "bootstrap";
 
 /* mixins, variables, etc. */
+
 $yellow: #ffea00;
 $gray-medium-light: #eaeaea;
 @mixin box_sizing{
@@ -415,22 +416,27 @@ span.picture {
 }
 /* miscellaneous*/
 .dl-special dt{
-
+    color: $gray-light;
+    line-height: 2;
     float: left;
-    width: 160px;
+    width :160px;
     clear: left;
-    text-align: leftt;
+    text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .dl-special dd{
-    margin-left: 160px;
-    border-bottom: 1px dotted #ba0000;
+  line-height: 2;
+  margin-left: 180px;
+  border-bottom: 1px dotted #ba0000;
 }
 .bill {
   margin-left: 20px;
+}
+.custom {
+  padding:10px;
 }
 .statement {
   background-color: #ccc;

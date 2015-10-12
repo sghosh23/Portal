@@ -1,43 +1,73 @@
-<% provide(:title, 'Edit') %>
-<h1>Update your profile</h1>
+<% provide(:title, "Update profile of #{full_name(@contact[:first_name], @contact[:last_name])}") %>
+
+<div class="page-header">
+  <h1>Profile Update <small> <%= full_name(@contact[:first_name], @contact[:last_name]) %></small></h1>
+</div>
 <div class="row">
    <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:user, url: update_user_path) do |f| %>
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, :value => @contact[:first_name] %>
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, :value => @contact[:last_name] %>
-      <%= f.label :email %>
-      <%= f.text_field :email, :value => @contact[:email] %>
-      <%= f.label :organization_name %>
-      <%= f.text_field :organization_name, :value => @contact[:organization_name] %>
-      <%= f.label "Phone Number"%>
-      <ul class="list-inline">
-        <li><%= f.text_field :phone_area_code , :value => @contact[:phone_area_code] %></li>
-        <li><%= f.text_field :phone_country_code , :value => @contact[:phone_country_code] %></li>
-        <li><%= f.text_field :phone_number , :value => @contact[:phone_number] %></li>
+    <%= form_for(:user, url: update_user_path, :html => {class: "form-horizontal"}) do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name, :class => "control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= f.text_field :first_name, :value => @contact[:first_name], :class =>"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, :class => "control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= f.text_field :last_name, :value => @contact[:last_name], :class =>"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, :class => "control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= f.text_field :email, :value => @contact[:email], :class =>"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :organization_name, :class => "control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= f.text_field :organization_name, :value => @contact[:organization_name], :class =>"form-control" %>
+        </div>
+      </div>
 
-      </ul>
-      <%= f.label "Social Security"%>
-      <ul class="list-inline">
-        <li><%= f.text_field :social_security_code1 , :value => @contact[:social_security_code1] %></li>
-        <li><%= f.text_field :social_security_code2 , :value => @contact[:social_security_code2] %></li>
-        <li><%= f.text_field :social_security_code3 , :value => @contact[:social_security_code3] %></li>
 
-      </ul>
-      <%= f.label :address1 %>
-      <%= f.text_field :address1 , :value => @contact[:address1] %>
-      <%= f.label :address2 %>
-      <%= f.text_field :address2 , :value => @contact[:address2] %>
-      <%= f.label :postal_code %>
-      <%= f.text_field :postal_code , :value => @contact[:postal_code] %>
-      <%= f.label :city %>
-      <%= f.text_field :city , :value => @contact[:city] %>
-      <%= f.label :state_province %>
-      <%= f.text_field :state_province , :value => @contact[:state_province] %>
-      <%= f.label "Include in Notification" %>
-      <%= check_box_tag( :include ) %>
-      <%= f.submit "Update Account", class: "btn btn-primary" %>
+
+      <%= f.hidden_field :phone_area_code , :value => @contact[:phone_area_code] %>
+      <%= f.hidden_field :phone_country_code , :value => @contact[:phone_country_code] %>
+      <%= f.hidden_field :phone_number , :value => @contact[:phone_number] %>
+
+
+
+      <%= f.hidden_field :social_security_code1 , :value => @contact[:social_security_code1] %>
+      <%= f.hidden_field :social_security_code2 , :value => @contact[:social_security_code2] %>
+      <%= f.hidden_field :social_security_code3 , :value => @contact[:social_security_code3] %>
+
+
+
+      <%= f.hidden_field :address1 , :value => @contact[:address1] %>
+
+      <%= f.hidden_field :address2 , :value => @contact[:address2] %>
+
+      <%= f.hidden_field :postal_code , :value => @contact[:postal_code] %>
+
+      <%= f.hidden_field :city , :value => @contact[:city] %>
+
+      <%= f.hidden_field :state_province , :value => @contact[:state_province] %>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <div class="checkbox">
+            <label>
+              <%= f.check_box(:include, {checked: true}) %> Include in Notification
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= f.submit "Update Account", class: "btn btn-primary" %>
+        </div>
+      </div>
     <% end %>
 
   </div>
