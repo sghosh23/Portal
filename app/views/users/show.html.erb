@@ -3,7 +3,7 @@
 <%#= @user %>
 
 <div class="page-header">
-  <h1>Billing profile <small> <%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %>| <%= @user[:user_id] %></small></h1>
+  <h1>Billing profile <small> <%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %> | <%= @user[:user_id] %></small></h1>
 </div>
 <div class="col-md-8 col-md-offset-2">
   <p class="bg-warning custom"> If you want to change your service address and Billing method please call us at 987590214</p>
@@ -20,6 +20,8 @@
            <dd><%= full_name(@user[:contact][:first_name], @user[:contact][:last_name]) %> </dd>
            <dt>Account Number </dt>
            <dd><%= @user[:user_id] %></dd>
+           <dt>Login </dt>
+           <dd><%= organization_name(@user[:user_name]) %></dd>
            <dt>Organization Name </dt>
            <dd><%= organization_name(@user[:contact][:organization_name]) %></dd>
            <dt>Phone Number </dt>
@@ -68,10 +70,10 @@
       <div class="panel-body">
 
         Get notified when your bill is ready to view and when your payment is successfully received. You will always receive these notifications by email to your billing email address.</br></br>
-        
-        Notification <%= notification(@user[:contact][:include])%></br>
-        <b>EMAIL</b></br></br>
 
+        Notification <%= notification(@user[:contact][:include])%></br>
+        EMAIL
+        <p class="pull-right"> <%= link_to "Change Settings", edit_user_path(session[:user_id]), class: "btn btn-primary" %> </p>
         <%= @user[:contact][:email] %>
       </div>
     </div>

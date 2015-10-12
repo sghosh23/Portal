@@ -12,5 +12,10 @@ class PaymentsController < ApplicationController
     puts @payment_id
   end
 
+  def show
+
+    @statement = Payment.new.get_payment(params[:id])
   
+  end
+
 end

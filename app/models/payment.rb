@@ -30,7 +30,11 @@ class Payment
      end
    end
 
-   def process_payment
+   def process_payment(payment)
+     response = client.call(:process_payment, message: { payment: payment })
+     if response.success?
+       data = response.to_array(:process_payment_response, :return).first
+     end
    end
    private
     def method_type?

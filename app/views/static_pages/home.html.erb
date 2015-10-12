@@ -57,8 +57,9 @@
           <% if @payment_latest %>
            <%= number_to_currency(@payment_latest[:amount],   precision: 2) %> (<%= @payment_latest[:method] %>)</br>
            <small> Applied : <%= time_format(@payment_latest[:payment_date]) %></small></small>
+          <% else %>
+          $0.00
           <% end %>
-          <p> You don't have any Latest payment </p>
         </div>
      </div>
     </div>
