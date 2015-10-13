@@ -12,11 +12,9 @@
    <div class="container">
      <div id="wrap">
        <div id="main" class="container clear-top">
-         <% flash.each do |message_type, message| %>
-           <div class="alert alert-<%= message_type%>">
-             <%= message %>
-           </div>
-         <% end %>
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, class: "alert alert-info" %>
+          <% end %>
          <%= yield %>
        </div>
      </div>
