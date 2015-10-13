@@ -1,0 +1,82 @@
+<%#= @payment_id %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <p> <b>Payment Details </b></p>
+    <table class="table table-hover">
+
+      <tr>
+        <td>
+          Payment Id
+        </td>
+        <td><%= @statement[:id] %></td>
+      </tr>
+      <tr>
+        <td>
+          Payment Date
+        </td>
+        <td><%= time_format(@statement[:payment_date]) %></td>
+      </tr>
+      <tr>
+        <td>
+          Payment Amount
+        </td>
+        <td><%= number_to_currency(@statement[:amount]) %></td>
+      </tr>
+      <tr>
+        <td>
+          Payment Status
+        </td>
+        <td><%= result(@statement[:result_id]) %></td>
+      </tr>
+      <tr>
+        <td>
+          Payment Method
+        </td>
+        <td><%= @statement[:method] %></td>
+      </tr>
+      <tr>
+        <td>
+          Remaining Balance
+        </td>
+        <td><%= number_to_currency(@statement[:balance].to_f) %></td>
+      </tr>
+      <% if @statement[:authorization_id] %>
+        <tr>
+          <td>
+            Response code
+          </td>
+          <td><%= @statement[:authorization_id][:code1] %></td>
+        </tr>
+        <tr>
+          <td>
+            Payemnt Processor
+          </td>
+          <td><%= @statement[:authorization_id][:processor] %></td>
+        </tr>
+        <tr>
+          <td>
+            Response Message
+          </td>
+          <td><%= @statement[:authorization_id][:response_message] %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          Linked Invoices
+        </td>
+        <td>
+          <% if @statement[:invoice_ids]!= nil %>
+          <% if @statement[:invoice_ids].kind_of?(Array) %>
+            <%= @statement[:invoice_ids].map{|i| link_to i, invoice_path(i)}.join(' , ').html_safe %>
+          <% else %>
+            <%= link_to @statement[:invoice_ids], invoice_path(@statement[:invoice_ids]) %>
+          <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<%#= @statement %>
+<%#= @statement[:invoice_ids].kind_of?(Array) %>
