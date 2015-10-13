@@ -45,16 +45,18 @@ class CreditsController < ApplicationController
         if @invoice_id
            @data = Payment.new.process_payment(payment_with_invoice)
            if @data
-             flash.now[:info] = "Payment is success"
+
              redirect_to payment_path(@data[:payment_id])
+             flash.now[:info] = "Payment is success"
            else
              @data = Payment.new.process_payment(payment)
            end
         else
           @data = Payment.new.process_payment(payment_without_invoice)
           if @data
-             flash.now[:info] = "Payment is success"
+
              redirect_to payment_path(@data[:payment_id])
+             flash.now[:info] = "Payment is success"
           else
              @data = Payment.new.process_payment(payment)
           end
