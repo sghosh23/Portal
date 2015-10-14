@@ -26,19 +26,20 @@
 
   <%= render 'ach', f: f %>
 
+  <div class="form-group form-inline">
+      <div class="col-xs-offset-4 col-xs-4 ">
+        <div class="col-xs-6">
+          <%= f.submit 'Make Payment', :class => "btn btn-yellow" %>
+        </div>
+        <div class="col-xs-6">
+          <%= link_to 'Cancel Payment', root_path, :class => "btn btn-danger" %>
+        </div>
+      </div>
 
-
-
-
-
-<div class="form-group">
-    <div class="col-xs-offset-3 col-xs-6">
-
-        <%= f.submit 'Make Payment', :class => "btn btn-primary" %>
-    </div>
-</div>
+  </div>
 
 <% end %>
+
 <!-- </form> -->
 </div>
 </div>

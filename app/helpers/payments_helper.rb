@@ -3,7 +3,7 @@ module PaymentsHelper
    if id.to_i == 1
      "successfull"
    elsif id.to_i == 2
-     "Fail"
+     "Failed"
    elsif id.to_i == 3
       "Processor Unavailable"
 

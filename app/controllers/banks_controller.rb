@@ -22,7 +22,7 @@ class BanksController < ApplicationController
                  :ach => {
                  :aba_routing => @bank.routing_number,
                  :account_name => @bank.account_name,
-
+                 :account_type => @bank.account_type.to_i,
                  :bank_account => @bank.account_number,
                  :bank_name => @bank.bank_name }
                }
@@ -38,25 +38,31 @@ class BanksController < ApplicationController
                 :ach => {
                 :aba_routing => @bank.routing_number,
                 :account_name => @bank.account_name,
-                :account_type => @bank.account_type.to_s,
+                :account_type => @bank.account_type.to_i,
                 :bank_account => @bank.account_number,
                 :bank_name => @bank.bank_name }
               }
        if @invoice_id
           @data = Payment.new.process_payment(payment_with_invoice)
           if @data
-            flash.now[:info] = "Payment is success"
+            if @data[:result_id].to_i == 1 || 2
+              flash[:danger] = "Payment is not successfull. Please check your Acount information is correct."
+            else
+              flash[:success] = "Payment is successfull. Thank you for your payment. "
+            end
             redirect_to payment_path(@data[:payment_id])
-          else
-            @data = Payment.new.process_payment(payment)
+
           end
        else
          @data = Payment.new.process_payment(payment_without_invoice)
          if @data
-            flash.now[:info] = "Payment is success"
+           if @data[:result_id].to_i == 1 || 2
+             flash[:danger] = "Payment is not successfull. Please check your Acount information is correct."
+           else
+             flash[:success] = "Payment is successfull. Thank you for your payment. "
+           end
             redirect_to payment_path(@data[:payment_id])
-         else
-            @data = Payment.new.process_payment(payment)
+
          end
        end
 

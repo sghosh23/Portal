@@ -33,10 +33,10 @@
         <div class="panel-body">
           <p><small><em> Next Invoice Date :</em> <%= time_format( @user[:next_invoice_date]) %></small></p>
           <div class="col-xs-6">
-            <%= link_to "Pay with credit card", new_credit_path, :class => "btn btn-danger", :id => "pay_link" %>
+            <%= link_to "Pay with credit card", new_credit_path, :class => "btn pull-left btn-danger", :id => "pay_link" %>
           </div>
           <div class="col-xs-6">
-            <%= link_to "Pay with ACH", new_bank_path, :class => "btn btn-danger", :id => "pay_link" %>
+            <%= link_to "Pay with ACH(Bank)", new_bank_path, :class => "btn btn-danger", :id => "pay_link" %>
           </div>
         </div>
         <div class="panel-footer"><small> Please pay your outstanding bills if you have unpaid invoices</small></div>

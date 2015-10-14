@@ -26,15 +26,14 @@
 
   <%= render 'credit_card', f: f %>
 
-
-
-
-
-
 <div class="form-group">
     <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
-
-        <%= f.submit 'Make Payment', :class => "btn btn-primary" %>
+      <div class="col-xs-6">
+        <%= f.submit 'Make Payment', :class => "btn btn-yellow" %>
+      </div>
+      <div class="col-xs-6">
+        <%= link_to 'Cancel Payment', root_path, :class => "btn btn-danger" %>
+      </div>
     </div>
 </div>
 
