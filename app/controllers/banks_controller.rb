@@ -45,8 +45,8 @@ class BanksController < ApplicationController
        if @invoice_id
           @data = Payment.new.process_payment(payment_with_invoice)
           if @data
-            if @data[:result_id].to_i == 1 || 2
-              flash[:danger] = "Payment is not successfull. Please check your Acount information is correct."
+            if @data[:result_id].to_i == 3 || 2
+              flash[:danger] = "Payment is not successful. Please check your Acount information is correct."
             else
               flash[:success] = "Payment is successfull. Thank you for your payment. "
             end
@@ -56,8 +56,8 @@ class BanksController < ApplicationController
        else
          @data = Payment.new.process_payment(payment_without_invoice)
          if @data
-           if @data[:result_id].to_i == 1 || 2
-             flash[:danger] = "Payment is not successfull. Please check your Acount information is correct."
+           if @data[:result_id].to_i == 3 || 2
+             flash[:danger] = "Payment is not successful. Please check your Acount information is correct."
            else
              flash[:success] = "Payment is successfull. Thank you for your payment. "
            end
