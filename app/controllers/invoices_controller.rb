@@ -3,9 +3,12 @@ class InvoicesController < ApplicationController
   before_action :user_data, only: [:show, :create_invoice]
   #before_action :all_invoices, only: [:index, :show]
   include InvoiceFiltering
-  
+
   def index
-    @invoices = invoices
+    Rails.cache.fetch("#{session[:user_id]}") do
+      @invoices = invoices
+    end
+
   end
 
   def show

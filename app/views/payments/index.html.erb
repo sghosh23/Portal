@@ -1,2 +1,31 @@
-<%= @payment.inspect %> </br>
-<%= @id %>
+<% provide(:title, "Payment History") %>
+<div class="page-header">
+  <h1>Payment History</h1>
+</div>
+<table class="table table-condensed">
+  <tr>
+    <th>Payment ID</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th>Method</th>
+    <th>Authorization code</th>
+  </tr>
+
+  <%  @payments.each do |payment| %>
+    <tr>
+        <td><%= link_to payment[:id], payment_path(payment[:id])  %></td>
+        <td><%= time_format payment[:payment_date] %></td>
+        <td><%= result(payment[:result_id]) %></td>
+        <td><%= number_to_currency(payment[:amount], precision: 2) %></td>
+        <td><%= number_to_currency(payment[:balance].to_f,   precision: 2)%></td>
+        <td><%= payment[:method]%></td>
+        <% if payment[:authorization_id] %>
+         <td><%= payment[:authorization_id][:code1] %></td>
+        <% end %>
+    </tr>
+  <% end %>
+
+
+</table>
