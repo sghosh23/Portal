@@ -17,7 +17,7 @@ gem 'savon', '~> 2.10.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary-edge'
-
+gem "font-awesome-rails"
 gem 'figaro'
 gem 'dalli'
 group :development, :test do

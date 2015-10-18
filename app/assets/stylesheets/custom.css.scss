@@ -129,22 +129,26 @@ p {
     outline: 0;
 }
 
-.navbar-default,
-.navbar-custom {
-    border: 0;
 
-}
+// .navbar-custom {
+//   text-decoration: none;
+//   background-color: #ffea00;
+//   color: #000;
+//
+// }
 .navbar-custom .navbar-nav > li > a {
     color:#999;
+
 }
-.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-    color: #ffffff;
-    background-color:transparent;
-}
+
 .navbar-custom .navbar-brand {
     color:#eeeeee;
 }
-.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus { text-decoration: none; background-color: #ffea00; color: #000;}
+.navbar-custom .navbar-nav > li > a:hover, .navbar-custom .navbar-nav > li > a:focus {
+  text-decoration: none;
+  background-color: #ffea00;
+  color: #000;
+ }
 // #logo {
 //   float: left;
 //   margin-right: 10px;
