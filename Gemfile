@@ -15,11 +15,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'savon', '~> 2.10.0'
 
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
-gem 'wkhtmltopdf-binary-edge'
+gem 'wkhtmltopdf-heroku'
 gem "font-awesome-rails"
 gem 'figaro'
 gem 'dalli'
+
+group :development do
+  gem 'wkhtmltopdf-binary'
+  gem 'wkhtmltopdf-binary-edge'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'
