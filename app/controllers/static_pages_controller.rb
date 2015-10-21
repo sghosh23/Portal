@@ -15,7 +15,7 @@ class StaticPagesController < ApplicationController
       @latest_order = @order[:order_lines] if @order
       @payments = Payment.new.get_payment_by_date(current_user[:user_id])
       @payments_data = []
-      @payments_data = @payments.map{|m| [m.split('@').last, m.split('@').first.to_i]}
+      @payments_data = @payments.map{|m| [ time_format(Date.strptime(m.split('@').last)), m.split('@').first.to_i]}
       @payment_list = @payments_data.sort{ |a, b| b[1] <=> a[1] }
       @payment = Payment.new
 

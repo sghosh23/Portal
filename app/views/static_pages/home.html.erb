@@ -17,7 +17,7 @@
             <dt><small>Service Address :</small></dt>
             <dd>
                <address>
-                 <strong> <%= @user[:contact][:address1]%> </strong></br>
+                 <%= @user[:contact][:address1] %></br>
                  <%= @user[:contact][:address2] if @user[:contact][:address2] %>
                  <%= @user[:contact][:postal_code] %> - <%= @user[:contact][:city] %>,  <%= @user[:contact][:state_province] %>, USA
                </adress>
@@ -31,7 +31,7 @@
     <div class="col-xs-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          <p><small><i class="fa fa-calendar-check-o"></i><em> Next Invoice Date :</em> <%= time_format( @user[:next_invoice_date]) %></small></p>
+          <p><small><i class="fa fa-calendar-check-o"></i> <em>Next Invoice Date :</em> <%= time_format( @user[:next_invoice_date]) %></small></p>
           <div class="col-xs-6">
             <%= link_to '<i class="fa fa-credit-card"></i> Pay with credit card'.html_safe, new_credit_path, :class => "btn pull-left btn-danger", :id => "pay_link" %>
           </div>
@@ -80,7 +80,7 @@
           <h3 class="panel-title"><i class="fa fa-usd"></i> Current Charges <span class=" <%= status_invoice @latest_invoice[:status_id] if @latest_invoice  %>"> <%= status_print @latest_invoice[:status_id] if @latest_invoice %></span></h3>
         </div>
         <div class="panel-body">
-          <%= number_to_currency(@latest_invoice[:balance],   precision: 2) if @latest_invoice %> </br>
+          <%= number_to_currency(@latest_invoice[:balance], precision: 2) if @latest_invoice %> </br>
           <small> Due Date : <%= time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
         </div>
      </div>
@@ -91,7 +91,7 @@
           <h3 class="panel-title"><i class="fa fa-usd"></i> Total Balance</h3>
         </div>
         <div class="panel-body">
-         <%= number_to_currency(@user[:owing_balance],   precision: 2) %></br>
+         <%= number_to_currency(@user[:owing_balance], precision: 2) %></br>
          <small> Due Date : <%= time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
         </div>
      </div>
@@ -129,12 +129,12 @@
       <div class="col-xs-4">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Invoice Statement</h3>
+            <h3 class="panel-title">Invoice Detail</h3>
           </div>
           <div class="panel-body">
             <%= form_tag create_invoice_url do %>
               <%= select_tag( :id, options_for_select(@invoice_list) ) %>
-              <%= submit_tag 'Invoice Statement', class: "button" %>
+              <%= submit_tag 'Invoice Detail', class: "button" %>
             <% end %>
           </div>
        </div>
@@ -143,12 +143,12 @@
          <div class="col-xs-4">
            <div class="panel panel-primary">
              <div class="panel-heading">
-               <h3 class="panel-title">Payment Statement</h3>
+               <h3 class="panel-title">Payment Detail</h3>
              </div>
              <div class="panel-body">
                <%= form_tag statement_url do %>
-                 <%= select_tag(:id, options_for_select( @payment_list) ) %>
-                 <%= submit_tag 'Payment Statement', class: "button" %>
+                 <%= select_tag(:id, options_for_select(@payment_list) ) %>
+                 <%= submit_tag 'Payment Detail', class: "button" %>
                <% end %>
              </div>
           </div>
