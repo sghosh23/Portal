@@ -1,3 +1,25 @@
 <% provide(:title, "Payment details") %>
-
+<div class="page-header">
+  <h1><i class="fa fa-book fa-fw"></i> Payment Details</h1>
+</div>
 <%= render 'payment_details', statement: @statement %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Try for a new payment</h3>
+      </div>
+      <div class="panel-body">
+
+
+          <div class="col-xs-6">
+            <%= link_to '<i class="fa fa-credit-card"></i> Pay with credit card'.html_safe, new_credit_path, class: "btn pull-left btn-yellow" %>
+          </div>
+          <div class="col-xs-6">
+            <%= link_to '<i class="fa fa-university"></i> Pay with ACH(Bank)'.html_safe, new_bank_path, class: "btn pull-right btn-yellow" %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
