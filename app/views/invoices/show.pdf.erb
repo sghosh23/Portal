@@ -1,4 +1,5 @@
 <div class="container">
+
       <div class="row">
         <div class="col-xs-6">
           <h1>
@@ -8,18 +9,18 @@
             </a>
           </h1>
         </div>
-        <div class="col-xs-6 text-right">
-          <h1>INVOICE</h1>
-          <h1><small>Invoice # <%= @invoice[:number]%></small></h1>
-          <h3><small>Due date # <%= time_format @invoice[:due_date] %></small></h3>
-          <h4> <%= link_to 'PDF', invoice_path(format: 'pdf') %> </h4>
+        <div class="pull-right col-xs-6">
+
+          <p class="pull-right">Invoice # <%= @invoice[:number]%> |
+          Due date # <%= time_format @invoice[:due_date] %></p>
+          <h4> <%#= link_to 'PDF', invoice_path(format: 'pdf') %> </h4>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-5">
-          <div class="panel panel-default">
+        <div class="col-xs-6">
+          <div class="panel panel-primary">
             <div class="panel-heading">
-              <h4>From: <a href="#">KITCARSON TECHNOLOGY</a></h4>
+              <h3 class="panel-title">From: KITCARSON TECHNOLOGY</h3>
             </div>
             <div class="panel-body">
               <p>
@@ -30,10 +31,10 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-5 col-xs-offset-2 text-right">
-          <div class="panel panel-default">
+        <div class="col-xs-6 pull-right">
+          <div class="panel panel-primary">
             <div class="panel-heading">
-              <h4>To : <a href="#"><%= full_name(@user[:first_name], @user[:last_name]) %>  </a></h4>
+              <h3 class="panel-title">To : <%= full_name(@user[:first_name], @user[:last_name]) %>  </h3>
             </div>
             <div class="panel-body">
               <p>
@@ -115,9 +116,9 @@
       </div>
       <div class="row">
         <div class="col-xs-5">
-          <div class="panel panel-info">
+          <div class="panel panel-primary">
             <div class="panel-heading">
-              <h4>Account Info</h4>
+              <h3 class="panel-title">Account Info</h3>
             </div>
             <div class="panel-body">
               <p>Account Number : <%= @invoice[:user_id] %></p>
@@ -130,14 +131,14 @@
         </div>
         <div class="col-xs-7">
           <div class="span7">
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
               <div class="panel-heading">
-                <h4>Contact Details</h4>
+                <h3 class="panel-title">Contact Details</h3>
               </div>
               <div class="panel-body">
                 <p>
                   Email : billing@kitcarson.net <br><br>
-                  Billing : <a href="https://nbilling.imeet.biz">Pay your bill</a><br> <br>
+
                   Phone : +1 334 8948732</a>
                 </p>
                 <h4>Payment should be made by Bank Transfer, Credit card OR Cash</h4>
