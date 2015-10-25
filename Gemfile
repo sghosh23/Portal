@@ -15,14 +15,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'savon', '~> 2.10.0'
 
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-heroku'
+gem 'wkhtmltopdf-binary'
 gem "font-awesome-rails"
 gem 'figaro'
 gem 'dalli'
 
 group :development do
-  gem 'wkhtmltopdf-binary'
+
   gem 'wkhtmltopdf-binary-edge'
+end
+group :production do
+  gem 'wkhtmltopdf-heroku'
 end
 
 group :development, :test do
