@@ -104,24 +104,47 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <% if @order %>
-          <h3 class="panel-title">Current plan <span class="badge"> <%= @order[:billing_type_str] %> </span>
-          <small> <u> Active since: <%= time_format(@order[:active_since]) %></u></small></h3>
+            <% if @order.instance_of? Array  %>
+              <h3 class="panel-title">Current plan </h3>
+            <% else %>
+              <h3 class="panel-title">Current plan <span class="badge"> <%= @order[:billing_type_str] %> </span>
+              <small> <u> Active since: <%= time_format(@order[:active_since]) %></u></small></h3>
+            <% end %>
           <% end %>
         </div>
         <div class="panel-body">
-         <% if @latest_order %>
-          <table class="table">
-            <tr>
-              <th> Item </th>
-              <th>Amount </th>
-            </tr>
-            <% @latest_order.each do |item| %>
-              <tr>
-                <td> <%= item[:description]%> </td>
-                <td><%= number_to_currency( item[:amount] )%> </td>
-              </tr>
+         <% if @order %>
+           <% if @order.instance_of? Array %>
+             <% @order.each do |latest_order| %>
+               <small>Order id: <%= latest_order[:id]%> <span class="badge"> <%= latest_order[:billing_type_str] %> </span>Active since: <%= time_format(latest_order[:active_since]) %></small>
+               <table class="table">
+                  <tr>
+                    <th> Item </th>
+                    <th>Amount </th>
+                  </tr>
+                  <% latest_order[:order_lines].each do |item| %>
+                    <tr>
+                      <td> <%= item[:description]%> </td>
+                      <td><%= number_to_currency( item[:amount] )%> </td>
+                    </tr>
+                  <% end %>
+                </table>
+              <% end %>
+            <% else %>
+              <small>Order id: <%= @order[:id]%> </small>
+              <table class="table">
+                <tr>
+                  <th> Item </th>
+                  <th>Amount </th>
+                </tr>
+                <% @order[:order_lines].each do |item| %>
+                  <tr>
+                    <td> <%= item[:description]%> </td>
+                    <td><%= number_to_currency( item[:amount] )%> </td>
+                  </tr>
+                <% end %>
+              </table>
             <% end %>
-          </table>
           <% end %>
         </div>
       </div>

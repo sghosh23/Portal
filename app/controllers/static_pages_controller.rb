@@ -9,10 +9,11 @@ class StaticPagesController < ApplicationController
 
       @user = user.get_user(session[:user_id])
       @latest_invoice = user.get_latest_invoice(session[:user_id])
-      #@items = @latest_invoice[:invoice_lines].reject { |h| h[:item_id] == "200" }
+
       @payment_latest = Payment.new.get_latest_payment(current_user[:user_id])
       @order = Order.new.latest_order(current_user[:user_id])
-      @latest_order = @order[:order_lines] if @order
+      @order_type = @order.class
+      #@latest_order = @order[:order_lines] if @order
       @payments = Payment.new.get_payment_by_date(current_user[:user_id])
       @payments_data = []
       @payments_data = @payments.map{|m| [ time_format(Date.strptime(m.split('@').last)), m.split('@').first.to_i]}
@@ -22,17 +23,11 @@ class StaticPagesController < ApplicationController
       @invoices_data = invoices.map { |e| [time_format(e[:create_time_stamp]), e[:id]] }
       @invoice_list = @invoices_data.sort{ |a, b| b[1] <=> a[1]}
 
-      #puts current_user[:user_id]
-      #puts @payments_data
+
     end
   end
 
-  def help
-  end
 
-  def about
-
-  end
   def account
     user = User.new
     @user = user.contact
@@ -41,9 +36,4 @@ class StaticPagesController < ApplicationController
   end
 
 
-  # private
-  #   def user_id
-  #     user = User.new("splace")
-  #
-  #   end
 end
