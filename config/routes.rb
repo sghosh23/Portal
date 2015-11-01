@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get 'get_password' => 'sessions#get_password'
+  post 'get_password' => 'sessions#new_password'
   get    'profile' => 'users#show'
   post 'statement' => 'payments#statement'
   post 'make_payment' => 'payments#make_payment'

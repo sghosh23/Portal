@@ -10,7 +10,7 @@
       <div class="form-group">
         <%= f.label :username, :class => "col-xs-2 control-label" %>
         <div class="col-xs-10">
-          <%= f.text_field :username, class: 'form-control', placeholder: "Email" %>
+          <%= f.text_field :username, class: 'form-control', placeholder: "User Name" %>
         </div>
       </div>
       <div class="form-group">
@@ -25,13 +25,18 @@
           <div class="checkbox">
             <label>
 
-              <%= f.check_box :remember_me  %> &nbsp;&nbsp;&nbsp; Remember me
-
+              <%= f.check_box :remember_me  %> &nbsp;&nbsp;&nbsp; Remember me |
+               <%= link_to "Forgot password?", get_password_path  %>
             </label>
           </div>
         </div>
       </div>
-      <%= f.submit "Log in", class: 'btn-lg btn-yellow', id: 'login' %>
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <%= f.submit "Log in", class: 'btn btn-yellow', id: 'login' %>
+        </div>
+      </div>
+
     <% end %>
 
   </div>

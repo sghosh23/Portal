@@ -29,6 +29,18 @@ class SessionsController < ApplicationController
       render 'new'
      end
   end
+  def get_password
+
+  end
+  def new_password
+    userobj = User.new
+    username = params[:session][:username]
+    password_response = userobj.get_password(username)
+    if password_response
+      flash.now[:info] = "Successfully applied. A new password is sent to your email"
+      redirect_to login_path
+    end
+  end
 
   def destroy
     log_out if logged_in?

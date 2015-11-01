@@ -40,7 +40,12 @@ class User
     #    @user = response.to_array(:get_user_ws_response, :return).first
     #  end
    end
-
+   def get_password(username)
+     response = @client.call(:get_new_password, message: {  entity_id: 10.to_s, username: username })
+     if response
+       @data = response
+     end
+   end
    def get_latest_invoice(user_id)
      invoice_data = @client.call(:get_latest_invoice, message: { user_id: user_id})
      if invoice_data.success?

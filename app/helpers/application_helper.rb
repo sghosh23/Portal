@@ -16,6 +16,8 @@ module ApplicationHelper
       "label label-warning"
     elsif status == "Overdue 2"
     return  "label label-warning"
+  elsif status == "Overdue 3"
+  return  "label label-warning"
     elsif status == "suspended"
       "label label-danger"
     elsif status == "suspended 2"
