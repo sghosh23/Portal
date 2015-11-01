@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         username username
     #     params[:session][:remember_me] == '1' ? remember(user) : forget(user)
     #     redirect_to_or user
-        flash.now[:info] = "Successfully logged in"
+        flash[:info] = "Successfully logged in"
 
     #     message = "Account not activated."
     #     message += "Check your email for the activation link"
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       #end
 
      else
-      flash.now[:danger] = "Invalid Username/Password Combination"
+      flash[:danger] = "Invalid Username/Password Combination"
       render 'new'
      end
   end
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
     username = params[:session][:username]
     password_response = userobj.get_password(username)
     if password_response
-      flash.now[:info] = "Successfully applied. A new password is sent to your email"
+      flash[:info] = "Successfully applied. A new password is sent to your email"
       redirect_to login_path
     end
   end
