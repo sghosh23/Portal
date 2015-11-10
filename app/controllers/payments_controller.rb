@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
       end
     end
   end
-
+# its tests code and changing shit
   def statement
     @payment_id = params[:id]
     @statement = Payment.new.get_payment(@payment_id)
