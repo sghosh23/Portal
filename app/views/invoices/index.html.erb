@@ -20,8 +20,14 @@
         <td><%= invoice[:status_descr] %></td>
         <td><%= number_to_currency(invoice[:total], precision: 2) %></td>
         <td><%= number_to_currency(invoice[:balance].to_f,   precision: 2)%></td>
-        <td><%= link_to invoice[:payments].to_i, payment_path(invoice[:payments].to_i) %></td>
-        <td><%= link_to "Downdload pdf", invoice_path(invoice[:id], format: 'pdf')%></td>
+        <td><%#= link_to invoice[:payments].to_i, payment_path(invoice[:payments].to_i) %>
+          <% if invoice[:payments].kind_of?(Array) %>
+            <%= invoice[:payments].map{|i| link_to i, invoice_path(i)}.join(' , ').html_safe %>
+          <% else %>
+            <%= link_to invoice[:payments].to_i, payment_path(invoice[:payments].to_i) %>
+          <% end %>
+        </td>
+        <td><%= link_to "Downdload pdf", invoice_path(invoice[:id], format: 'pdf'), html_options = {:target => "_blank"} %></td>
     </tr>
   <% end %>
 

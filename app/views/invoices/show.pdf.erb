@@ -122,8 +122,8 @@
             </div>
             <div class="panel-body">
               <p>Account Number : <%= @invoice[:user_id] %></p>
-              <p>Balance : <%= number_to_currency(@invoice[:balance].to_f,   precision: 2)%></p>
-              <p>Previous Due: <%=  number_to_currency(@invoice[:carried_balance].to_f ,  precision: 2)%></p>
+              <p>Balance : <%= number_to_currency(@user_info[:owing_balance],   precision: 2)%></p>
+              <!-- <p>Previous Due: <%#=  number_to_currency(@invoice[:carried_balance].to_f ,  precision: 2)%></p> -->
               <p>Status : <%= @invoice[:status_descr]%></p>
 
             </div>

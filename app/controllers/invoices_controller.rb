@@ -56,7 +56,9 @@ class InvoicesController < ApplicationController
      def user_data
        contact = Invoice.new
        @user = contact.get_contact(current_user[:user_id])
+       @user_info = User.new.get_user(session[:user_id])
      end
+
      def all_invoices
        invoice = Invoice.new
        invoices = invoice.get_all_invoices(current_user[:user_id])
