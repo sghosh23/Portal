@@ -5,7 +5,7 @@
 </div>
   <% if logged_in? && @user[:role] == "Customer" %>
 
-  
+
   <div class="row">
     <p> <h3 class="bill"> Billing  <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></h3></p>
     <div class="col-xs-6 ">
@@ -61,7 +61,7 @@
            <%= number_to_currency(@payment_latest[:amount],   precision: 2) %> (<%= @payment_latest[:method] %>)</br>
            <small> Applied : <%= time_format(@payment_latest[:payment_date]) %></small></small>
           <% else %>
-          $0.00
+            "No payment"
           <% end %>
         </div>
      </div>
@@ -83,8 +83,12 @@
           <h3 class="panel-title"><i class="fa fa-usd"></i> Current Charges <span class=" <%= status_invoice @latest_invoice[:status_id] if @latest_invoice  %>"> <%= status_print @latest_invoice[:status_id] if @latest_invoice %></span></h3>
         </div>
         <div class="panel-body">
-          <%= number_to_currency(@latest_invoice[:balance], precision: 2) if @latest_invoice %> </br>
-          <small> Due Date : <%= time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
+          <% if @latest_invoice %>
+            <%= number_to_currency(@latest_invoice[:balance], precision: 2) %> </br>
+            <small> Due Date : <%= time_format(@latest_invoice[:due_date])  %></small>
+          <% else %>
+            "No chrages"
+          <% end %>
         </div>
      </div>
     </div>
@@ -95,7 +99,7 @@
         </div>
         <div class="panel-body">
          <%= number_to_currency(@user[:owing_balance], precision: 2) %></br>
-         <small> Due Date : <%= time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
+         <small>  <%= "Due Date : " + time_format(@latest_invoice[:due_date]) if @latest_invoice %></small>
         </div>
      </div>
     </div>
