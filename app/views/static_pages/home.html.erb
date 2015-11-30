@@ -5,7 +5,7 @@
 </div>
   <% if logged_in? && @user[:role] == "Customer" %>
 
-   <%= @user %>
+  
   <div class="row">
     <p> <h3 class="bill"> Billing  <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></h3></p>
     <div class="col-xs-6 ">
