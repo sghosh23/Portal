@@ -67,11 +67,11 @@
         </td>
         <td>
           <% if @statement[:invoice_ids]!= nil %>
-          <% if @statement[:invoice_ids].kind_of?(Array) %>
-            <%= @statement[:invoice_ids].map{|i| link_to i, invoice_path(i)}.join(' , ').html_safe %>
-          <% else %>
-            <%= link_to @statement[:invoice_ids], invoice_path(@statement[:invoice_ids]) %>
-          <% end %>
+            <% if @statement[:invoice_ids].kind_of?(Array) %>
+              <%= @statement[:invoice_ids].map{|i| link_to i, invoice_path(i)}.join(' , ').html_safe %>
+            <% else %>
+              <%= link_to @statement[:invoice_ids], invoice_path(@statement[:invoice_ids]) %>
+            <% end %>
           <% end %>
         </td>
       </tr>

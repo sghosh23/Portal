@@ -3,8 +3,9 @@
 <div class="page-header">
   <h1><i class="fa fa-tachometer"></i>  Dashboard</h1>
 </div>
-  <% if logged_in? %>
+  <% if logged_in? && @user[:role] == "Customer" %>
 
+   <%= @user %>
   <div class="row">
     <p> <h3 class="bill"> Billing  <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></h3></p>
     <div class="col-xs-6 ">
@@ -33,7 +34,7 @@
     <div class="col-xs-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          <p><small><i class="fa fa-calendar-check-o"></i> <em>Next Invoice Date :</em> <%= time_format( @user[:next_invoice_date]) %></small></p>
+          <p><small><i class="fa fa-calendar-check-o"></i> <em>Next Invoice Date :</em> <%= time_format( @user[:next_invoice_date]) if @user[:next_invoice_date] %></small></p>
           <div class="col-xs-6">
             <%= link_to '<i class="fa fa-credit-card"></i> Pay with credit card'.html_safe, new_credit_path, :class => "btn pull-left btn-danger", :id => "pay_link" %>
           </div>
@@ -184,10 +185,10 @@
 
 <% else %>
   <div class= "center jumbotron">
-    <h1>Your </h1>
-    <h2>Billing Portal
-      <a href="#">Kitcarson billing portal</h2></a>
-      <a href="#", class="btn btn-lg btn-primary">Login</h2></a>
-      <%#= link_to "login now", signup_path, class: "btn btn-lg btn-primary" %>
+    <h1>Billing Portal</h1>
+    <h2>[This portal is only for customer use]</h2>
+      <h2>Go to nbilling to manage your billing <a href="https://nbilling.imeet.biz">nBilling</h2></a>
+
   </div>
+
 <% end %>
