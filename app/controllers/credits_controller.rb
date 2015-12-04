@@ -47,7 +47,6 @@ class CreditsController < ApplicationController
            if @data
              if @data[:response_message] == "Transaction failed"
                flash[:danger] = "Payment is failed. Please check your Acount information is correct."
-
              else
                flash[:success] = "Payment is successfull. Thank you for your payment. "
              end
@@ -67,9 +66,8 @@ class CreditsController < ApplicationController
 
           end
         end
-      #flash.now[:info] = "Payment is successfull by Credit card. Thank you for your payment."
-    else
-      render :new
-    end
+      else
+        render :new
+      end
   end
 end

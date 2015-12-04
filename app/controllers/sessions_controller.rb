@@ -7,14 +7,12 @@ class SessionsController < ApplicationController
     username = params[:session][:username]
     user_id = userobj.user_id(params[:session][:username])
     password = params[:session][:password]
-    #puts user_id
-    #puts password
+
     user = userobj.authenticate(user_id, params[:session][:password])
-    # if user && params[:session][:password]
-    puts user
+
+
       if user
-        # user_info = userobj.get_user(user_id)
-        # puts user_info
+
         log_in user_id
         username username
     #     params[:session][:remember_me] == '1' ? remember(user) : forget(user)

@@ -40,6 +40,9 @@ class User
     #    @user = response.to_array(:get_user_ws_response, :return).first
     #  end
    end
+   def update_password(user)
+     response = @client.call(:update_user_password, message: { user: user })
+   end
    def get_password(username)
      response = @client.call(:get_new_password, message: {  entity_id: 10.to_s, username: username })
      if response
