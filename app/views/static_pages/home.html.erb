@@ -4,7 +4,8 @@
   <h1><i class="fa fa-tachometer"></i>  Dashboard</h1>
 </div>
   <% if logged_in? && @user[:role] == "Customer" %>
-
+  <%#= @latest_invoice %> <br>
+  <%#= @credit_data[0] %>
 
   <div class="row">
     <p> <h3 class="bill"> Billing  <span class=" <%= label_color(@user[:status]) %>"> <%= @user[:status] %></span></h3></p>
@@ -72,8 +73,8 @@
           <h3 class="panel-title"><i class="fa fa-usd"></i> Past Due Balance</h3>
         </div>
         <div class="panel-body">
-         <%= number_to_currency(@user[:carried_balance].to_f,   precision: 2) %></br>
-
+         <%#= number_to_currency(@user[:carried_balance].to_f,   precision: 2) %>
+         <%= number_to_currency(@credit_data[0].to_f,   precision: 2) %>
         </div>
      </div>
     </div>

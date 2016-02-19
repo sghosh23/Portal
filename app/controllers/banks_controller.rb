@@ -8,7 +8,7 @@ class BanksController < ApplicationController
     @bank = Bank.new(params[:bank])
     if @bank.valid?
       @invoice_id = params[:id]
-      @today = Date.today
+      @today = Time.zone.today
 
       payment_with_invoice = {:user_id => session[:user_id],
                  :amount => @bank.amount,

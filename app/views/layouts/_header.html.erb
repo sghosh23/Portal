@@ -3,7 +3,7 @@
       <div class="logo">
       <%#=link_to image_tag('Logo_Kit-1.png'), root_path %>
       <%= "Today" %></br>
-      <i class="fa fa-calendar-check-o"></i> <%= time_format(Date.today)%>
+      <i class="fa fa-calendar-check-o"></i> <%= time_format(Time.zone.today)%>
      </div>
         <nav>
           <ul class="nav navbar-nav pull-right">

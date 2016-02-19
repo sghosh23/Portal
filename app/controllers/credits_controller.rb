@@ -8,7 +8,7 @@ class CreditsController < ApplicationController
     @credit = Credit.new(params[:credit])
     if @credit.valid?
       @invoice_id = params[:id]
-      @today = Date.today
+      @today = Time.zone.today
       @expiration = @credit.year.to_s + "-" + @credit.month.to_s
       payment_with_invoice = {:user_id => session[:user_id],
                  :amount => @credit.amount,

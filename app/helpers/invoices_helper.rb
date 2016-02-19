@@ -2,6 +2,9 @@ module InvoicesHelper
   def time_format(date)
     "#{date.strftime("%d")} #{date.strftime("%B")}, #{date.strftime("%G")}"
   end
+  def create_time(date)
+    date.strftime("%Y-%m-%d")
+  end
   def full_name(first_name, last_name={})
   #  "#{first_name}" " " "#{last_name}"
     [first_name, last_name].join(' ')

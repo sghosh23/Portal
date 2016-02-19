@@ -63,4 +63,10 @@ class User
        @order_data = data
      end
    end
+   def previous_due(user_id, last_invoice_date)
+     response = @client.call(:retrive_user_payment_balance, message: {user_id: user_id, date: last_invoice_date})
+     if response.success?
+       data = response.to_array(:retrive_user_payment_balance_response, :return)
+     end
+   end
 end
