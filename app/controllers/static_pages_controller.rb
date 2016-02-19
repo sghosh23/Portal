@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
 
       @user = user.get_user(session[:user_id])
       @latest_invoice = user.get_latest_invoice(session[:user_id])
-      latest_time = create_time(@latest_invoice[:create_time_stamp])
+      latest_time = create_time(@latest_invoice[:create_time_stamp]) if @latest_time
       @credit_data = user.previous_due(session[:user_id], latest_time)
 
       @payment_latest = Payment.new.get_latest_payment(current_user[:user_id])
