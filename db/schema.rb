@@ -11,12 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923134028) do
+ActiveRecord::Schema.define(version: 20160413032358) do
 
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "credits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.string   "card_name"
+    t.integer  "card_number", limit: 8
+    t.integer  "month"
+    t.integer  "year"
+    t.integer  "security"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "credits", ["user_id"], name: "index_credits_on_user_id"
 
   create_table "invoices", force: :cascade do |t|
     t.datetime "created_at", null: false

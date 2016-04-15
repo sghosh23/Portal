@@ -5,8 +5,10 @@ class CreditsController < ApplicationController
     @unpaid_invoices = unpaid_invoices
   end
   def create
-    @credit = Credit.new(params[:credit])
+     @credit = Credit.new(params[:credit])
+    # @credit = Credit.new(credit_params)
     if @credit.valid?
+      # @credit.save
       @invoice_id = params[:id]
       @today = Time.zone.today
       @expiration = @credit.year.to_s + "-" + @credit.month.to_s
@@ -69,5 +71,11 @@ class CreditsController < ApplicationController
       else
         render :new
       end
+  end
+  private
+  def credit_params
+    params.require(:credit).
+    permit(:amount, :card_name, :card_number, :month, :year, :security).
+    merge(user_id: session[:user_id])
   end
 end
